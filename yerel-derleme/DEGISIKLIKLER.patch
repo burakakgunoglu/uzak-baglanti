@@ -1,0 +1,336 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 625f45d..5940644 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -260,8 +260,8 @@ webrtc-sctp = { git = "https://github.com/rustdesk-org/webrtc", rev = "49c89bd8d
+ 
+ [package.metadata.winres]
+ LegalCopyright = "Copyright © 2026 Purslane Tech Pte. Ltd. All rights reserved."
+-ProductName = "RustDesk"
+-FileDescription = "RustDesk Remote Desktop"
++ProductName = "Burak Akgunoglu Uzak Baglanti"
++FileDescription = "Burak Akgunoglu Uzak Baglanti"
+ OriginalFilename = "rustdesk.exe"
+ 
+ [target.'cfg(target_os="windows")'.build-dependencies]
+diff --git a/flutter/assets/icon.svg b/flutter/assets/icon.svg
+index 4d43f8b..2562959 100644
+--- a/flutter/assets/icon.svg
++++ b/flutter/assets/icon.svg
+@@ -1 +1,18 @@
+-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" viewBox="66.993 897.484 26 26"><linearGradient id="a" x1=".148" x2=".845" y1=".851" y2=".154" gradientTransform="matrix(26.301 0 0 26.331 90.674 911.757)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0071ff"/><stop offset="1" stop-color="#00bfe1"/></linearGradient><defs><linearGradient xlink:href="#a" id="b" x1=".148" x2=".845" y1=".851" y2=".154" gradientTransform="matrix(26.00048 0 0 25.99935 66.993 897.485)" gradientUnits="userSpaceOnUse"/></defs><path fill="url(#b)" d="m89.318 903.552-2.135 2.122c-.376.337-.558.879-.347 1.337 1.422 2.976.882 6.524-1.452 8.856-2.335 2.331-5.887 2.87-8.866 1.449-.439-.197-.954-.03-1.292.312l-2.17 2.167a1.154 1.154 0 0 0 .208 1.81 13.005 13.005 0 0 0 15.91-1.912 12.97 12.97 0 0 0 1.956-15.887 1.154 1.154 0 0 0-1.812-.254zm-18.467-2.305a12.969 12.969 0 0 0-2.02 15.885 1.154 1.154 0 0 0 1.812.254l2.124-2.11c.385-.336.572-.884.359-1.348-1.423-2.976-.884-6.524 1.451-8.856 2.334-2.332 5.887-2.871 8.866-1.45.434.194.942.033 1.281-.3l2.182-2.18a1.152 1.152 0 0 0-.208-1.81 13.009 13.009 0 0 0-15.893 1.973z"/></svg>
+\ No newline at end of file
++<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
++  <defs>
++    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
++      <stop offset="0" stop-color="#1B3A7A"/>
++      <stop offset="1" stop-color="#0B1630"/>
++    </linearGradient>
++    <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1">
++      <stop offset="0" stop-color="#4C9DFF"/>
++      <stop offset="1" stop-color="#1E63E9"/>
++    </linearGradient>
++  </defs>
++  <rect x="8" y="8" width="240" height="240" rx="54" fill="url(#bg)"/>
++  <rect x="48" y="62" width="160" height="108" rx="14" fill="#FFFFFF"/>
++  <rect x="60" y="74" width="136" height="84" rx="6" fill="url(#scr)"/>
++  <rect x="112" y="170" width="32" height="18" fill="#FFFFFF"/>
++  <rect x="84" y="186" width="88" height="14" rx="7" fill="#FFFFFF"/>
++  <path d="M108 90 L108 144 L122 131 L132 152 L143 147 L133 126 L152 126 Z" fill="#FFFFFF" stroke="#0B1630" stroke-width="5" stroke-linejoin="round"/>
++</svg>
+diff --git a/flutter/lib/common.dart b/flutter/lib/common.dart
+index 17dc0fc..c7cfe6b 100644
+--- a/flutter/lib/common.dart
++++ b/flutter/lib/common.dart
+@@ -249,16 +249,16 @@ class MyTheme {
+   MyTheme._();
+ 
+   static const Color grayBg = Color(0xFFEFEFF2);
+-  static const Color accent = Color(0xFF0071FF);
+-  static const Color accent50 = Color(0x770071FF);
+-  static const Color accent80 = Color(0xAA0071FF);
++  static const Color accent = Color(0xFF1E63E9);
++  static const Color accent50 = Color(0x771E63E9);
++  static const Color accent80 = Color(0xAA1E63E9);
+   static const Color canvasColor = Color(0xFF212121);
+   static const Color border = Color(0xFFCCCCCC);
+-  static const Color idColor = Color(0xFF00B6F0);
++  static const Color idColor = Color(0xFF2F80ED);
+   static const Color darkGray = Color.fromARGB(255, 148, 148, 148);
+   static const Color cmIdColor = Color(0xFF21790B);
+   static const Color dark = Colors.black87;
+-  static const Color button = Color(0xFF2C8CFF);
++  static const Color button = Color(0xFF1E63E9);
+   static const Color hoverBorder = Color(0xFF999999);
+ 
+   // ListTile
+@@ -471,9 +471,9 @@ class MyTheme {
+   static ThemeData darkTheme = ThemeData(
+     useMaterial3: false,
+     brightness: Brightness.dark,
+-    hoverColor: Color.fromARGB(255, 45, 46, 53),
+-    scaffoldBackgroundColor: Color(0xFF18191E),
+-    dialogBackgroundColor: Color(0xFF18191E),
++    hoverColor: Color.fromARGB(255, 30, 46, 78),
++    scaffoldBackgroundColor: Color(0xFF0F1A2E),
++    dialogBackgroundColor: Color(0xFF0F1A2E),
+     appBarTheme: AppBarTheme(
+       shadowColor: Colors.transparent,
+     ),
+@@ -562,7 +562,7 @@ class MyTheme {
+     colorScheme: ColorScheme.dark(
+       primary: Colors.blue,
+       secondary: accent,
+-      background: Color(0xFF24252B),
++      background: Color(0xFF16233D),
+     ),
+     popupMenuTheme: PopupMenuThemeData(
+         shape: RoundedRectangleBorder(
+@@ -4213,7 +4213,7 @@ List<String> getPrinterNames() {
+   }
+   try {
+     final List<dynamic> printerNamesList = jsonDecode(printerNamesJson);
+-    final appPrinterName = '$appName Printer';
++    final appPrinterName = 'BurakAkgunogluUzakBaglanti Printer';
+     return printerNamesList
+         .map((e) => e.toString())
+         .where((name) => name != appPrinterName)
+diff --git a/flutter/lib/desktop/pages/install_page.dart b/flutter/lib/desktop/pages/install_page.dart
+index 58ff028..6891cbd 100644
+--- a/flutter/lib/desktop/pages/install_page.dart
++++ b/flutter/lib/desktop/pages/install_page.dart
+@@ -326,7 +326,7 @@ class _InstallPageBodyState extends State<_InstallPageBody>
+     String? install_path = await FilePicker.platform
+         .getDirectoryPath(initialDirectory: controller.text);
+     if (install_path != null) {
+-      controller.text = join(install_path, await bind.mainGetAppName());
++      controller.text = join(install_path, 'BurakAkgunogluUzakBaglanti');
+     }
+   }
+ }
+diff --git a/flutter/lib/desktop/widgets/tabbar_widget.dart b/flutter/lib/desktop/widgets/tabbar_widget.dart
+index 8eddca6..4126d42 100644
+--- a/flutter/lib/desktop/widgets/tabbar_widget.dart
++++ b/flutter/lib/desktop/widgets/tabbar_widget.dart
+@@ -651,7 +651,7 @@ class _DesktopTabState extends State<DesktopTab>
+                         Offstage(
+                             offstage: !showTitle,
+                             child: const Text(
+-                              "RustDesk",
++                              "Burak Akgünoğlu Uzak Bağlantı",
+                               style: TextStyle(fontSize: 13),
+                             ).marginOnly(left: 2))
+                       ]).marginOnly(
+diff --git a/flutter/windows/runner/Runner.rc b/flutter/windows/runner/Runner.rc
+index 88d1854..cc74b35 100644
+--- a/flutter/windows/runner/Runner.rc
++++ b/flutter/windows/runner/Runner.rc
+@@ -90,12 +90,12 @@ BEGIN
+         BLOCK "040904e4"
+         BEGIN
+             VALUE "CompanyName", "Purslane Tech Pte. Ltd." "\0"
+-            VALUE "FileDescription", "RustDesk Remote Desktop" "\0"
++            VALUE "FileDescription", "Burak Akgünoğlu Uzak Bağlantı" "\0"
+             VALUE "FileVersion", VERSION_AS_STRING "\0"
+             VALUE "InternalName", "rustdesk" "\0"
+             VALUE "LegalCopyright", "Copyright © 2026 Purslane Tech Pte. Ltd. All rights reserved." "\0"
+             VALUE "OriginalFilename", "rustdesk.exe" "\0"
+-            VALUE "ProductName", "RustDesk" "\0"
++            VALUE "ProductName", "Burak Akgünoğlu Uzak Bağlantı" "\0"
+             VALUE "ProductVersion", VERSION_AS_STRING "\0"
+         END
+     END
+diff --git a/libs/portable/Cargo.toml b/libs/portable/Cargo.toml
+index 2074525..5d0544e 100644
+--- a/libs/portable/Cargo.toml
++++ b/libs/portable/Cargo.toml
+@@ -28,9 +28,9 @@ native-windows-gui = {version = "1.0", default-features = false, features = ["an
+ 
+ [package.metadata.winres]
+ LegalCopyright = "Copyright © 2026 Purslane Tech Pte. Ltd. All rights reserved."
+-ProductName = "RustDesk"
++ProductName = "Burak Akgunoglu Uzak Baglanti"
+ OriginalFilename = "rustdesk.exe"
+-FileDescription = "RustDesk Remote Desktop"
++FileDescription = "Burak Akgunoglu Uzak Baglanti"
+ #ProductVersion = ""
+ 
+ [target.'cfg(target_os="windows")'.build-dependencies]
+diff --git a/libs/portable/src/main.rs b/libs/portable/src/main.rs
+index 34dff54..e070965 100644
+--- a/libs/portable/src/main.rs
++++ b/libs/portable/src/main.rs
+@@ -283,7 +283,9 @@ fn main() -> Result<(), String> {
+         }
+         i += 1;
+     }
+-    let click_setup = args.is_empty() && arg_exe.to_lowercase().ends_with("install.exe");
++    let click_setup = args.is_empty()
++        && (arg_exe.to_lowercase().ends_with("install.exe")
++            || arg_exe.to_lowercase().ends_with("setup.exe"));
+     #[cfg(windows)]
+     let quick_support = args.is_empty() && win::is_quick_support_exe(&arg_exe);
+     #[cfg(not(windows))]
+diff --git a/src/common.rs b/src/common.rs
+index 4bc5bc2..1633d38 100644
+--- a/src/common.rs
++++ b/src/common.rs
+@@ -1227,6 +1227,18 @@ pub fn get_app_name() -> String {
+     hbb_common::config::APP_NAME.read().unwrap().clone()
+ }
+ 
++// Branding: APP_NAME stays a single ASCII token because it is used unquoted as the
++// Windows service name, registry key, install folder and URI scheme. This is the
++// human readable name shown in window titles, the tray and translated texts.
++pub const DISPLAY_NAME: &str = "Burak Akgünoğlu Uzak Bağlantı";
++// ASCII variant for values written through cmd scripts (registry DisplayName).
++pub const DISPLAY_NAME_ASCII: &str = "Burak Akgunoglu Uzak Baglanti";
++
++#[inline]
++pub fn get_display_name() -> String {
++    DISPLAY_NAME.to_owned()
++}
++
+ #[inline]
+ pub fn is_rustdesk() -> bool {
+     hbb_common::config::APP_NAME.read().unwrap().eq("RustDesk")
+@@ -1247,7 +1259,10 @@ pub fn get_full_name() -> String {
+ }
+ 
+ pub fn is_setup(name: &str) -> bool {
+-    !config::is_disable_installation() && name.to_lowercase().ends_with("install.exe")
++    !config::is_disable_installation() && {
++        let name = name.to_lowercase();
++        name.ends_with("install.exe") || name.ends_with("setup.exe")
++    }
+ }
+ 
+ pub fn get_custom_rendezvous_server(custom: String) -> String {
+diff --git a/src/core_main.rs b/src/core_main.rs
+index 0f62d1e..9022218 100644
+--- a/src/core_main.rs
++++ b/src/core_main.rs
+@@ -820,7 +820,7 @@ fn core_main_invoke_new_connection(mut args: std::env::Args) -> Option<Vec<Strin
+         use winapi::um::winuser::WM_USER;
+         let res = crate::platform::send_message_to_hnwd(
+             &crate::platform::FLUTTER_RUNNER_WIN32_WINDOW_CLASS,
+-            &crate::get_app_name(),
++            &crate::common::get_display_name(),
+             (WM_USER + 2) as _, // referred from unilinks desktop pub
+             uni_links.as_str(),
+             false,
+diff --git a/src/flutter.rs b/src/flutter.rs
+index 31e6582..eccf765 100644
+--- a/src/flutter.rs
++++ b/src/flutter.rs
+@@ -226,7 +226,7 @@ pub unsafe extern "C" fn free_c_args(ptr: *mut *mut c_char, len: c_int) {
+ #[cfg(windows)]
+ #[no_mangle]
+ pub unsafe extern "C" fn get_rustdesk_app_name(buffer: *mut u16, length: i32) -> i32 {
+-    let name = crate::platform::wide_string(&crate::get_app_name());
++    let name = crate::platform::wide_string(&crate::common::get_display_name());
+     if length > name.len() as i32 {
+         std::ptr::copy_nonoverlapping(name.as_ptr(), buffer, name.len());
+         return 0;
+diff --git a/src/flutter_ffi.rs b/src/flutter_ffi.rs
+index 0d6ca0a..a3b6166 100644
+--- a/src/flutter_ffi.rs
++++ b/src/flutter_ffi.rs
+@@ -1143,11 +1143,11 @@ pub fn main_get_socks() -> Vec<String> {
+ }
+ 
+ pub fn main_get_app_name() -> String {
+-    get_app_name()
++    crate::common::get_display_name()
+ }
+ 
+ pub fn main_get_app_name_sync() -> SyncReturn<String> {
+-    SyncReturn(get_app_name())
++    SyncReturn(crate::common::get_display_name())
+ }
+ 
+ pub fn main_uri_prefix_sync() -> SyncReturn<String> {
+diff --git a/src/lang.rs b/src/lang.rs
+index de54b9a..e443162 100644
+--- a/src/lang.rs
++++ b/src/lang.rs
+@@ -134,6 +134,10 @@ fn resolve_lang(saved_lang: &str, locale: &str, cjk_fallback: bool) -> String {
+     if cjk_fallback && is_cjk_lang(&lang) {
+         return "en".to_owned();
+     }
++    // Branding: Turkish unless the user picked another language in Settings.
++    if lang.is_empty() || lang == "default" {
++        lang = "tr".to_owned();
++    }
+     if lang.is_empty() {
+         // zh_CN on Linux, zh-Hans-CN on mac, zh_CN_#Hans on Android
+         if locale.starts_with("zh") {
+@@ -271,7 +275,7 @@ pub fn translate_locale(name: String, locale: &str) -> String {
+                 && !name.starts_with("upgrade_rustdesk_server_pro")
+                 && name != "powered_by_me"
+             {
+-                let app_name = crate::get_app_name();
++                let app_name = crate::common::get_display_name();
+                 if !app_name.contains("RustDesk") {
+                     s = s.replace("RustDesk", &app_name);
+                 } else {
+diff --git a/src/platform/windows.rs b/src/platform/windows.rs
+index a09783d..411ffcf 100644
+--- a/src/platform/windows.rs
++++ b/src/platform/windows.rs
+@@ -1773,6 +1773,7 @@ copy /Y \"{tmp_path}\\{app_name} Tray.lnk\" \"%PROGRAMDATA%\\Microsoft\\Windows\
+     // Remember to check if `update_me` need to be changed if changing the `cmds`.
+     // No need to merge the existing dup code, because the code in these two functions are too critical.
+     // New code should be written in a common function.
++    let display_name = crate::common::DISPLAY_NAME_ASCII;
+     let cmds = format!(
+         "
+ {uninstall_str}
+@@ -1781,12 +1782,12 @@ md \"{path}\"
+ {copy_exe}
+ reg add {subkey} /f
+ reg add {subkey} /f /v DisplayIcon /t REG_SZ /d \"{display_icon}\"
+-reg add {subkey} /f /v DisplayName /t REG_SZ /d \"{app_name}\"
++reg add {subkey} /f /v DisplayName /t REG_SZ /d \"{display_name}\"
+ reg add {subkey} /f /v DisplayVersion /t REG_SZ /d \"{version}\"
+ reg add {subkey} /f /v Version /t REG_SZ /d \"{version}\"
+ reg add {subkey} /f /v BuildDate /t REG_SZ /d \"{build_date}\"
+ reg add {subkey} /f /v InstallLocation /t REG_SZ /d \"{path}\"
+-reg add {subkey} /f /v Publisher /t REG_SZ /d \"{app_name}\"
++reg add {subkey} /f /v Publisher /t REG_SZ /d \"Burak Akgunoglu\"
+ reg add {subkey} /f /v VersionMajor /t REG_DWORD /d {version_major}
+ reg add {subkey} /f /v VersionMinor /t REG_DWORD /d {version_minor}
+ reg add {subkey} /f /v VersionBuild /t REG_DWORD /d {version_build}
+diff --git a/src/tray.rs b/src/tray.rs
+index 50e2de0..e64d065 100644
+--- a/src/tray.rs
++++ b/src/tray.rs
+@@ -84,13 +84,13 @@ fn make_tray() -> hbb_common::ResultType<()> {
+         if count == 0 {
+             format!(
+                 "{} {}",
+-                crate::get_app_name(),
++                crate::common::get_display_name(),
+                 translate("Service is running".to_owned()),
+             )
+         } else {
+             format!(
+                 "{} - {}\n{}",
+-                crate::get_app_name(),
++                crate::common::get_display_name(),
+                 translate("Ready".to_owned()),
+                 translate("{".to_string() + &format!("{count}") + "} sessions"),
+             )
+diff --git a/libs/hbb_common/src/config.rs b/libs/hbb_common/src/config.rs
+index 9ee5cac..fd4ef7e 100644
+--- a/libs/hbb_common/src/config.rs
++++ b/libs/hbb_common/src/config.rs
+@@ -68,7 +68,7 @@ lazy_static::lazy_static! {
+     static ref ONLINE: Mutex<HashMap<String, i64>> = Default::default();
+     pub static ref PROD_RENDEZVOUS_SERVER: RwLock<String> = RwLock::new("".to_owned());
+     pub static ref EXE_RENDEZVOUS_SERVER: RwLock<String> = Default::default();
+-    pub static ref APP_NAME: RwLock<String> = RwLock::new("RustDesk".to_owned());
++    pub static ref APP_NAME: RwLock<String> = RwLock::new("BurakAkgunogluUzakBaglanti".to_owned());
+     static ref KEY_PAIR: Mutex<Option<KeyPair>> = Default::default();
+     static ref USER_DEFAULT_CONFIG: RwLock<(UserDefaultConfig, Instant)> = RwLock::new((UserDefaultConfig::load(), Instant::now()));
+     pub static ref NEW_STORED_PEER_CONFIG: Mutex<HashSet<String>> = Default::default();
