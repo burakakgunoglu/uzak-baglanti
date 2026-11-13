@@ -31,6 +31,7 @@ env:
   VCPKG_TRIPLET: "x64-windows-static"
   VERSION: "1.5.3"
   SETUP_NAME: "Burak_Akgunoglu_Uzak_Baglanti_Setup.exe"
+  EXE_NAME: "BurakAkgunogluUzakBaglanti.exe"
 
 jobs:
   kopru:
@@ -176,6 +177,8 @@ jobs:
         run: |
           python3 .\build.py --portable --flutter --skip-portable-pack --hwcodec --vram
           mv ./flutter/build/windows/x64/runner/Release ./rustdesk
+          # Kurulum, exe'yi "<uygulama adı>.exe" adıyla arar; paketlemeden önce yeniden adlandır.
+          Rename-Item ./rustdesk/rustdesk.exe "$env:EXE_NAME"
 
           # Sanal ekran sürücüsü
           Invoke-WebRequest -Uri https://github.com/rustdesk-org/rdev/releases/download/usbmmidd_v2/usbmmidd_v2.zip -OutFile usbmmidd_v2.zip
@@ -223,7 +226,7 @@ jobs:
           sed -i '/dpiAware/d' res/manifest.xml
           pushd ./libs/portable
           pip3 install -r requirements.txt
-          python3 ./generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/rustdesk.exe
+          python3 ./generate.py -f ../../rustdesk/ -o . -e "../../rustdesk/${EXE_NAME}"
           popd
           mkdir -p ./cikti
           mv ./target/release/rustdesk-portable-packer.exe "./cikti/${SETUP_NAME}"
@@ -232,7 +235,7 @@ jobs:
       - name: Smoke test
         shell: powershell
         run: |
-          $v = (& ".\rustdesk\rustdesk.exe" --version | Out-String).Trim()
+          $v = (& ".\rustdesk\$env:EXE_NAME" --version | Out-String).Trim()
           Write-Output "Sürüm: $v"
           if ($v -cne $env:VERSION) { throw "Beklenen sürüm $env:VERSION, bulunan '$v'" }
 

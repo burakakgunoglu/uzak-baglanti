@@ -26,6 +26,7 @@ $VcpkgTriplet    = "x64-windows-static"
 $KopruSurumu     = "1.80.1"
 $CargoExpand     = "1.0.95"
 $KurulumAdi      = "Burak_Akgunoglu_Uzak_Baglanti_Setup.exe"
+$ExeAdi          = "BurakAkgunogluUzakBaglanti.exe"
 
 $Kaynak  = Join-Path $PSScriptRoot "rustdesk"
 $Src     = Join-Path $CalismaKlasoru "src"
@@ -185,6 +186,8 @@ $paket = Join-Path $Src "rustdesk"
 if (Test-Path $paket) { Remove-Item $paket -Recurse -Force }
 Move-Item "$Src\flutter\build\windows\x64\runner\Release" $paket
 if (-not (Test-Path "$paket\rustdesk.exe")) { throw "Derleme çıktısı bulunamadı: $paket\rustdesk.exe" }
+# Kurulum, exe'yi "<uygulama adı>.exe" adıyla arar.
+Rename-Item "$paket\rustdesk.exe" $ExeAdi
 
 # İsteğe bağlı sürücüler (sanal ekran, uzak yazıcı). İndirilemezse derleme sürer.
 try {
@@ -222,7 +225,7 @@ $satirlar = [IO.File]::ReadAllLines($manifest) | Where-Object { $_ -notmatch 'dp
 [IO.File]::WriteAllLines($manifest, $satirlar, (New-Object Text.UTF8Encoding $false))
 Push-Location "$Src\libs\portable"
 Py -m pip install -r requirements.txt
-Py generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/rustdesk.exe
+Py generate.py -f ../../rustdesk/ -o . -e "../../rustdesk/$ExeAdi"
 Pop-Location
 $packer = Join-Path $Src "target\release\rustdesk-portable-packer.exe"
 if (-not (Test-Path $packer)) { throw "Kurulum paketi üretilemedi: $packer" }
