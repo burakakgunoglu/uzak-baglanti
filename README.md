@@ -18,16 +18,13 @@ Yerel derleme dosyaları (`DERLE.bat`, `derle.ps1`) `yerel-derleme\` klasöründ
 
 | Konu | Durum |
 |---|---|
-| Markalanmış kaynak kod | Hazır (bu paket) |
-| Windows derleme betiği (`DERLE.bat`) | Hazır, **henüz hiçbir Windows bilgisayarda çalıştırılmadı** |
-| `Burak_Akgunoglu_Uzak_Baglanti_Setup.exe` | **Yok.** Betik bir Windows bilgisayarda çalıştırılınca `cikti\` klasöründe oluşur |
+| Markalanmış kaynak kod | Hazır |
+| GitHub Actions derlemesi | Başarılı (derleme 2); sürüm denetimi 1.5.3 olarak geçti |
+| `Burak_Akgunoglu_Uzak_Baglanti_Setup.exe` | Releases sayfasında yayımlandı (yaklaşık 25 MB, imzasız) |
 | Kurulum / kaldırma testi | Yapılmadı |
 | İki bilgisayar arası bağlantı testi | Yapılmadı |
+| Yerel derleme betiği (`yerel-derleme\DERLE.bat`) | Hiç çalıştırılmadı |
 | Sunucu | Varsayılan: RustDesk'in genel sunucuları (üçüncü taraf). Kendi sunucu dosyaları `sunucu\` klasöründe hazır, kurulmadı |
-
-Bu paket Linux üzerinde hazırlandı. Değişen Rust dosyaları yalnızca sözdizimi açısından denetlendi;
-tam derleme Windows gerektirdiği için yapılamadı. İlk derlemede hata çıkarsa `derleme-gunlugu.txt`
-dosyası sorunu gösterir.
 
 ## Paket içeriği
 
